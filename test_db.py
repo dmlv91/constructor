@@ -4,6 +4,7 @@ import mysql.connector
 
 from datetime import datetime
 from configparser import ConfigParser
+from mysql.connector import Error
 
 print("DB functional test")
 
@@ -36,10 +37,11 @@ print("SUCCESS!!")
 print("----------")
 
 #Check if it is possible to write to database
+print("Checking if it is possible to write to database")
 cursor = get_cursor()
 try:
 	cursor = connection.cursor()
-	result  = cursor.execute( "INSERT INTO `ast_daily` (`create_date`, `hazardous`, `name`, `url`, `diam_min`, `diam_max`, `ts`, `dt_utc`, `dt_local`, `speed`, `distance`, `ast_id`) VALUES ('testDate','testHazard', `testName`, `testUrl`, `testDiam_min`, `testDiam_max`, `testTs`, `testDt_utc`, `testDt_local`, `testSpeed`, `testDistance`, `testAst_id`)")
+	result  = cursor.execute( "INSERT INTO `ast_daily` (`create_date`, `hazardous`, `name`, `url`, `diam_min`, `diam_max`, `ts`, `dt_utc`, `dt_local`, `speed`, `distance`, `ast_id`) VALUES ('testDate', '0', 'testName', 'testURL', '10.5', '99.9', '1234567890', 'testDateUTC', 'testDateLocal', '1234567890', '1234567890', '12345')")
 	connection.commit()
 except Error as e :
 	print('Problem inserting asteroid values into DB: ' + str(e))
