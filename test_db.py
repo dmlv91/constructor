@@ -46,6 +46,7 @@ try:
 except Error as e :
 	print('Problem inserting asteroid values into DB: ' + str(e))
 	pass
-assert cursor.fetchwarnings() == []
+
+assert cursor.fetchwarnings() == None
 print("SUCCESS!!")
 print("-----------")
