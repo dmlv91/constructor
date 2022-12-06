@@ -50,3 +50,16 @@ except Error as e :
 assert cursor.fetchwarnings() == None
 print("SUCCESS!!")
 print("-----------")
+
+#Check if it possible to write to databes with incorrect data types
+print("Checking if it is possible to insert invalid data types into database")
+cursor = get_cursor()
+try:
+	cursor = connection.cursor()
+	result  = cursor.execute( "INSERT INTO `ast_daily` (`create_date`, `hazardous`, `name`, `url`, `diam_min`, `diam_max`, `ts`, `dt_utc`, `dt_local`, `speed`, `distance`, `ast_id`) VALUES ('10.5', 'yes', 'testName', 'testURL', 'yes', 'yes', '12.5', 'testDateUTC', 'testDateLocal', '123456789012', '1234567890.56', 'value')")
+	connection.commit()
+except Error as e :
+	print('Problem inserting asteroid values into DB: ' + str(e))
+	pass
+
+assert cursor.fetchwarnings() != None
