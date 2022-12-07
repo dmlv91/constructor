@@ -7,7 +7,7 @@ from configparser import ConfigParser
 from mysql.connector import Error
 
 print("DB functional test")
-
+print("-------------")
 #reading configuration from file
 config = ConfigParser()
 config.read('config.ini')
@@ -50,20 +50,31 @@ except Error as e :
 	pass
 cursor.execute("SELECT * FROM ast_daily")
 newCount = cursor.rowcount
-print(count, " rows before insertion")
-print(newCount, " rows after insertion")
 assert newCount > count
 print("SUCCESS!!")
 print("-----------")
 
-#Check if it possible to write to databes with incorrect data types
-print("Checking if it is possible to insert invalid data types into database")
-#try:
-#	cursor = connection.cursor()
-#	result  = cursor.execute( "INSERT INTO `ast_daily` (`create_date`, `hazardous`, `name`, `url`, `diam_min`, `diam_max`, `ts`, `dt_utc`, `dt_local`, `speed`, `distance`, `ast_id`) VALUES ('10.5', 'yes', 'testName', 'testURL', 'yes', 'yes', '12.5', 'testDateUTC', 'testDateLocal', '123456789012', '1234567890.56', 'value')")
-#	connection.commit()
-#except Error as e :
-#	print('Problem inserting asteroid values into DB: ' + str(e))
-#	pass
+#Check if it is possible to edit entry in database
+print("Checking if it is possible to edit database entry")
+name = cursor.execute("SELECT id from ast_daily where name='testName'")
+rec = cursor.fetchall()
+cursor.execute("UPDATE ast_daily SET name='updated' where url='testURL'")
+connection.commit()
+newName = cursor.execute("SELECT id from ast_daily where url='testName'")
+newRec = cursor.fetchall()
+assert len(rec) > len(newRec)
+print("SUCCESS!!")
+print("-----------")
 
-#print(cursor.fetchwarnings())
+#Check if it is possible to delete entry from database
+print("Checking if it is possible to delet database entry")
+name = cursor.execute("SELECT id from ast_daily where name='updated'")
+rec = cursor.fetchall()
+cursor.execute("DELETE from ast_daily where url='testURL'")
+connection.commit()
+newName = cursor.execute("SELECT id from ast_daily where name='updated'")
+newRec = cursor.fetchall()
+assert len(rec) > len(newRec)
+print("SUCCESS!!")
+print("-----------")
+print("DB tests finished. Database is ready to use!")
