@@ -12,9 +12,9 @@ git pull origin "$curr"
 message="$1"
 
 # If no commit message is passed, use current date time in the commit message
-if [[ -z "${message// }" ]]
+if [[ -z "${message// }" ]];
     then
-        message="$(date '+%Y-%m-%d %H:%M:%S')
+        message="Automatic git push was made '$(date '+%Y-%m-%d %H:%M:%S')'"
 fi
 
 # stage all changes
@@ -27,4 +27,4 @@ echo "Changes commited with message: '$message'"
 
 # git push
 git push origin "$curr"
-echo "Changes pushed to '$curr' branch"
+echo "Changes pushed to '$curr' branch!"
