@@ -6,6 +6,7 @@ from datetime import datetime
 from configparser import ConfigParser
 from mysql.connector import Error
 
+print("test")
 print("DB functional test")
 print("-------------")
 #reading configuration from file
