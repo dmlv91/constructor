@@ -27,8 +27,4 @@ echo "Changes commited with message: '$message'"
 
 # git push
 git push origin "$curr"
-<<<<<<< HEAD
 echo "Changes pushed to '$curr' branch!"
-=======
-echo "Changes pushed to '$curr' branch!"
->>>>>>> 320ec73d53d5dd4a3631e9556c9304097e389f8b
