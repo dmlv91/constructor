@@ -78,3 +78,4 @@ assert len(rec) > len(newRec)
 print("SUCCESS!!")
 print("-----------")
 print("DB tests finished. Database is ready to use!")
+
