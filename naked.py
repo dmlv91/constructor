@@ -11,6 +11,9 @@ from datetime import datetime
 from configparser import ConfigParser
 from mysql.connector import Error
 
+#here the new button will be placed
+print("Jauna poga")
+
 # Loading logging configuration
 with open('./log_worker.yaml', 'r') as stream:
     log_config = yaml.safe_load(stream)
